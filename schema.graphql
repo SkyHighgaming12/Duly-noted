@@ -1,0 +1,74 @@
+"Mutation have side effects, such as mutation data triggering a task"
+
+type Mutation {
+    "Create a Note"
+    createNote(note: CreateNoteInput!): Note!
+
+    "Update a note"
+    updateNote(id: ID!, note: UpdateNoteInput!): Note!
+
+    "Delete a note"
+    deleteNote(id: ID!): Note!
+}
+
+"Queries return all requested data, without any side effects"
+type Query {
+    "Get one note by id"
+    note(
+        "The ID of the note you want data for"
+        id: ID!
+    ): Note
+
+    "Get all notes"
+    notes(
+        "whether archived shows or not"
+        isArchived: Boolean
+    ): [Note]
+
+    
+}
+
+"A Note"
+type Note{
+    "Note ID"
+    id: ID!
+
+    "The time this note was created"
+    createdAt: String!
+
+    "The Time this note was updated"
+    updatedAt: String!
+
+    "whether this note is archived"
+    isArchived: Boolean!
+
+    "The Note text, which may contain markdown"
+    text: String!
+}
+
+"input for crating a new note"
+input CreateNoteInput{
+    "Note ID"
+    id: ID
+
+    "The time this note was created"
+    createdAt: String
+
+    "The time this note is updated"
+    updatedAt: String
+
+    "whether this note is archived"
+    isArchived: Boolean
+
+    "The Note text, which may contain markdown"
+    text: String!
+}
+
+"input for updating a note"
+input UpdateNoteInput{
+    "whether this note is archived"
+    isArchived: Boolean
+
+    "The Note text, which may contain markdown"
+    text: String
+}
